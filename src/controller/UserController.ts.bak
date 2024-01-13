@@ -1,0 +1,72 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+import {AppDataSource} from '../data-source'
+import {NextFunction, Request, Response} from 'express'
+import {User} from '../entity/User'
+import {validate} from 'class-validator'
+import {Controller} from '../decorator/Controller'
+import {Route} from '../decorator/Route'
+
+@Controller('/users')
+export class UserController {
+
+    private userRepository = AppDataSource.getRepository(User)
+
+	@Route('get')
+    async all(request: Request, response: Response, next: NextFunction) {
+    	return this.userRepository.find()
+    }
+
+	@Route('get','/:id')
+	async one(request: Request, response: Response, next: NextFunction) {
+    	const id = parseInt(request.params.id)
+
+    	const user = await this.userRepository.findOne({
+    		where: {id}
+    	})
+
+    	if (!user) {
+    		//return 'unregistered user'
+    		next() // the next method in the stack creates a 404 not found and the following method the JSONifies is
+    	}
+    	return user
+	}
+
+	@Route('post')
+	async save(request: Request, response: Response, next: NextFunction) {
+
+    	const newUser = Object.assign(new User(), request.body)
+    	const violations = await validate(newUser,
+
+    		{
+    			stopAtFirstError: true,
+    			skipMissingProperties: false,
+    			validationError: {
+    				target: false,
+    				value: false
+    			}
+    		})
+    	if (violations.length > 0) {
+    		response.statusCode = 422 //Unprocessable Content
+    		return violations // return the violation to be JSONified
+    	} else {
+    		response.statusCode = 201 //Created
+    		return this.userRepository.save(newUser)
+    	}
+	}
+
+	@Route('delete','/:id')
+	async remove(request: Request, response: Response, next: NextFunction) {
+    	const id = parseInt(request.params.id)
+
+    	const userToRemove = await this.userRepository.findOneBy({id})
+
+    	if (!userToRemove) {
+    		return 'this user not exist'
+    	}
+
+    	await this.userRepository.remove(userToRemove)
+
+    	return 'user has been removed'
+	}
+
+}
