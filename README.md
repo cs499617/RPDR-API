@@ -10,7 +10,7 @@ It is very important to do the first step. It will create a "node-modules" direc
 
 # Technologies Used
   - BootStrap/BootsTheme libraries
-  - JavaScript/TypeScript
+  - TypeScript
   - TypeOrm
   - npm
   - SQLite
