@@ -9,19 +9,19 @@ It is very important to do the first step. It will create a "node-modules" direc
 3. Run `npm start` command
 
 # Technologies Used
-  -BootStrap/BootsTheme libraries
-  -JavaScript/TypeScript
-  -TypeOrm
-  -npm
-  -SQLite
+  - BootStrap/BootsTheme libraries
+  - JavaScript/TypeScript
+  - TypeOrm
+  - npm
+  - SQLite
 
 # Features
 This project incorporates the following concepts learned during the second year of web development:
-  -Web Servers
-  -Web Databases
-  -npm
-  -Application Programming Interface (API)
-  -Tokens
+  - Web Servers
+  - Web Databases
+  - npm
+  - Application Programming Interface (API)
+  - Tokens
 
 # How to use
 This API can be tested through Postman or used in other projects using "fetch"
