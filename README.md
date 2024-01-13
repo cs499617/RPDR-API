@@ -1,6 +1,6 @@
 # RPDR-API
 This project was completed as a second-year class assignment where students had to create their own API. This API focuses on an American reality television show called "RuPauls Drag Race". 
-The time taken to complete this project was 1 weeks or roughly 15-20 hours.
+The time taken to complete this project was 1 week or roughly 15-20 hours.
 
 # How to run this project
 It is very important to do the first step. It will create a "node-modules" directory that supports a chunk of this projects functionality.
